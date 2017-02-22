@@ -3,7 +3,11 @@ package com.example.alexandrzanko.tablet_6vkusov;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class RegistrationActivity extends AppCompatActivity {
+import com.example.alexandrzanko.tablet_6vkusov.Utilites.JsonLoader.LoadJson;
+
+import org.json.JSONObject;
+
+public class RegistrationActivity extends AppCompatActivity implements LoadJson{
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -11,5 +15,10 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+    }
+
+    @Override
+    public void loadComplete(JSONObject obj, String sessionName) {
+
     }
 }
