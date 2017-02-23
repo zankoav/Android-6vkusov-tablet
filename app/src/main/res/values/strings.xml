@@ -30,5 +30,15 @@
 
     <!--Errors-->
     <string name="error_server">Ошибка соединения, попробуйте еще раз</string>
+    <string name="error_min_name_length">Слишком короткое имя</string>
+    <string name="error_name_only_literals">Имя должно состоять только из букв</string>
+    <string name="error_email">Не верный формат email</string>
+    <string name="error_min_password_length">Пороль должен состоять не менее чем из 6 символов</string>
+    <string name="error_not_equals_passwords">Пороли не совпадают</string>
+    <string name="error_max_name_length">Слишком длинное имя</string>
+    <string name="error_max_password_length">Слишком длинный пароль</string>
+    <string name="error_max_promo_code">Слишком длинный промокод</string>
+    <string name="error_promo_code_symbols_and_numbers">Промокод может состоять только из букв и/или цифр</string>
+    <string name="error_license_agree">Подтвердите согласие с условием пользовательского соглашения</string>
     <!--Errors end-->
 </resources>

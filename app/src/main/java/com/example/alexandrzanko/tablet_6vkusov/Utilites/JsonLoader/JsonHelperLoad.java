@@ -89,8 +89,6 @@ public class JsonHelperLoad extends AsyncTask<Void, Void, JSONObject> {
 
             client.connect();
             InputStream is = null;
-            int code = client.getResponseCode();
-            Log.i(TAG, String.valueOf(code));
             if (client.getResponseCode() == HttpsURLConnection.HTTP_OK) {
                 is = client.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
