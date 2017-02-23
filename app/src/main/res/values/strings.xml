@@ -16,8 +16,9 @@
     <string name="reg_password">Пароль</string>
     <string name="reg_password_confirm">Повторить пароль</string>
     <string name="reg_promo">Промокод (не обязательно)</string>
-    <string name="reg_before_label">Перед регистрацией ознакомьтесь с</string>
-    <string name="reg_license_btn">пользовательским соглашением</string>
+    <string name="reg_license_btn">Условия пользовательского соглашения и основных документов</string>
+    <string name="reg_news">Получать новости</string>
+    <string name="reg_license">Я прочитал и принимаю</string>
     <string name="reg_button">Зарегистрироваться</string>
     <string name="reg_button_maybe_login">У Вас уже есть созданный профиль? ВОЙДИТЕ</string>
     <!--Для RegistrationActivity END-->
@@ -26,4 +27,8 @@
     <string name="api_login">https://6vkusov.by/api/login</string>
     <string name="api_registration">https://6vkusov.by/api/register</string>
     <!--Для REST API END-->
+
+    <!--Errors-->
+    <string name="error_server">Ошибка соединения, попробуйте еще раз</string>
+    <!--Errors end-->
 </resources>

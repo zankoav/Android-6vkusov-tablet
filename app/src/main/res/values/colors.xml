@@ -6,5 +6,6 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorLightGray">#EEEEEE</color>
     <color name="colorGray">#999999</color>
+    <color name="colorDarkGray">#202020</color>
     <color name="colorBlack">#000000</color>
 </resources>
