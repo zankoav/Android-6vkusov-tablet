@@ -1,6 +1,7 @@
 package com.example.alexandrzanko.tablet_6vkusov.Utilites.JsonLoader;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -27,6 +28,8 @@ import javax.net.ssl.X509TrustManager;
  */
 
 public class JsonHelperLoad extends AsyncTask<Void, Void, JSONObject> {
+
+    private final String TAG = this.getClass().getSimpleName();
 
     private String url, name;
     private JSONObject params;
@@ -86,6 +89,8 @@ public class JsonHelperLoad extends AsyncTask<Void, Void, JSONObject> {
 
             client.connect();
             InputStream is = null;
+            int code = client.getResponseCode();
+            Log.i(TAG, String.valueOf(code));
             if (client.getResponseCode() == HttpsURLConnection.HTTP_OK) {
                 is = client.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
