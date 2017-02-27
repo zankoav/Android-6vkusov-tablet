@@ -1,7 +1,6 @@
 package com.example.alexandrzanko.tablet_6vkusov.Utilites.JsonLoader;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONObject;
 

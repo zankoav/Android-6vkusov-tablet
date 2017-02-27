@@ -1,17 +1,20 @@
-package com.example.alexandrzanko.tablet_6vkusov;
+package com.example.alexandrzanko.tablet_6vkusov.Activities.AuthActivities;
 
+import android.content.Context;
 import android.graphics.Color;
-import android.nfc.Tag;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.alexandrzanko.tablet_6vkusov.R;
 import com.example.alexandrzanko.tablet_6vkusov.Utilites.JsonLoader.JsonHelperLoad;
 import com.example.alexandrzanko.tablet_6vkusov.Utilites.JsonLoader.LoadJson;
 import com.example.alexandrzanko.tablet_6vkusov.Utilites.JsonLoader.Validation;
@@ -31,6 +34,7 @@ public class RegistrationActivity extends AppCompatActivity implements LoadJson{
         setContentView(R.layout.activity_registration);
         addToolBarToScreen();
         initFields();
+
     }
 
     @Override
@@ -41,6 +45,14 @@ public class RegistrationActivity extends AppCompatActivity implements LoadJson{
             Toast toast = Toast.makeText(getApplicationContext(),this.getResources().getString(R.string.error_server), Toast.LENGTH_SHORT);
             toast.show();
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        // TODO Auto-generated method stub
+        InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        return super.onTouchEvent(event);
     }
 
     public void registerPressed(View view) {
@@ -148,4 +160,7 @@ public class RegistrationActivity extends AppCompatActivity implements LoadJson{
     }
 
 
+    public void backButtonClick(View view) {
+        finish();
+    }
 }

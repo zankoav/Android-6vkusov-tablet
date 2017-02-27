@@ -188,6 +188,7 @@
                 android:text="@string/reg_button_maybe_login"
                 android:textColor="@color/colorWhite"
                 android:minHeight="70dp"
+                android:onClick="backButtonClick"
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
