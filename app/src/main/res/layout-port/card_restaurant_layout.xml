@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    card_view:cardBackgroundColor="@color/colorWhite"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="3dp"
+    card_view:contentPadding="15dp"
+    card_view:cardUseCompatPadding="true"
+    android:layout_margin="5dp"
+    android:clickable="true">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:id="@+id/restaurants_icon"
+            android:layout_width="160dp"
+            android:src="@drawable/ic_thumbs_up"
+            android:layout_marginRight="10dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/restaurants_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/restaurants_icon"
+            android:textColor="@color/colorHeader" />
+
+        <TextView
+            android:id="@+id/restaurants_kitchen_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_toLeftOf="@+id/restaurants_like_icon"
+            android:layout_toRightOf="@+id/restaurants_icon"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:id="@+id/restaurants_dislikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="7"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true" />
+
+        <ImageView
+            android:id="@+id/restaurants_dislikes_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_thumb_down"
+            android:scaleType="fitCenter"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/restaurants_dislikes" />
+
+        <TextView
+            android:id="@+id/restaurants_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="260"
+            android:layout_toLeftOf="@+id/restaurants_dislikes_icon"
+            android:layout_alignParentTop="true"/>
+
+        <ImageView
+            android:id="@+id/restaurants_like_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_thumbs_up"
+            android:scaleType="centerCrop"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/restaurants_likes"
+            />
+
+        <ImageView
+            android:id="@+id/restaurants_card_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="6dp"
+            android:src="@drawable/ic_credit_card"
+            android:scaleType="fitCenter"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"/>
+
+        <ImageView
+            android:id="@+id/restaurants_delivery_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="6dp"
+            android:src="@drawable/ic_delivery_man"
+            android:scaleType="fitCenter"
+            android:layout_toLeftOf="@+id/restaurants_card_icon"
+            android:layout_alignParentBottom="true" />
+
+        <TextView
+            android:id="@+id/restaurants_time_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/restaurants_time"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/restaurants_icon" />
+
+        <TextView
+            android:id="@+id/restaurants_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentBottom="true"
+            android:text="40 мин."
+            android:layout_toRightOf="@+id/restaurants_time_title" />
+
+        <TextView
+            android:id="@+id/restaurants_delivery_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginLeft="5dp"
+            android:layout_above="@+id/restaurants_time_title"
+            android:layout_toRightOf="@+id/restaurants_icon"
+            android:text="@string/restaurants_delivery" />
+
+        <TextView
+            android:id="@+id/restaurants_delivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/restaurants_delivery_title"
+            android:layout_above="@+id/restaurants_time_title"
+            android:text="5 руб" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

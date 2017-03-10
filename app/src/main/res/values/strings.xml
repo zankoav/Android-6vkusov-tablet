@@ -9,6 +9,12 @@
     <string name="categories_title">Категории</string>
     <!--Для CategoriesActivity END-->
 
+    <!--Для RestaurantsActivity-->
+    <string name="restaurants_title">Рестораны</string>
+    <string name="restaurants_time">Время доставки:</string>
+    <string name="restaurants_delivery">Минимальный заказ:</string>
+    <!--Для RestaurantsActivity END-->
+
     <!--Для ProfileActivity-->
     <string name="profile_title">Профиль</string>
     <!--Для ProfileActivity END-->
@@ -45,6 +51,7 @@
     <!--Для RegistrationActivity END-->
 
     <!--Для REST API-->
+    <string name="api_base_uri">https://6vkusov.by</string>
     <string name="api_login">https://6vkusov.by/api/login</string>
     <string name="api_registration">https://6vkusov.by/api/register</string>
     <string name="api_remember">https://6vkusov.by/api/remember</string>

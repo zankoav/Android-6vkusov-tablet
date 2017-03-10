@@ -22,4 +22,15 @@
         <item name="colorControlActivated">@color/colorButtons</item>
     </style>
 
+    <style name="CheckBoxFilter" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlActivated">@color/colorButtons</item>
+    </style>
+
+    <style name="AppTheme.SeekBar">
+        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/colorButtons</item>
+        <item name="colorAccent">@color/colorButtons</item>
+    </style>
+
 </resources>
