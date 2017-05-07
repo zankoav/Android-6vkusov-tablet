@@ -17,8 +17,10 @@ import com.example.alexandrzanko.tablet_6vkusov.LocalStorage;
 import com.example.alexandrzanko.tablet_6vkusov.R;
 import com.example.alexandrzanko.tablet_6vkusov.Singleton;
 import com.example.alexandrzanko.tablet_6vkusov.Users.STATUS;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         loginOrProfile = (TextView) findViewById(R.id.btn_login);
         userLogo = (ImageView)findViewById(R.id.iv_user);
         lunchScreen = (ImageView)findViewById(R.id.iv_lunchScreen);
-        Log.i(TAG, "onCreate: ");
         singleton.initStore(this);
     }
 
@@ -58,8 +59,15 @@ public class MainActivity extends AppCompatActivity {
         }else{
             String email = null;
             try {
-                email = singleton.getUser().getProfile().getString("email");
+                JSONObject userJson = singleton.getUser().getProfile();
+                email = userJson.getString("email");
                 loginOrProfile.setText(email);
+                String urlIcon = this.getResources().getString(R.string.api_base) + userJson.getString("img_path")+"/"+ userJson.getString("avatar");
+                Picasso.with(this)
+                        .load(urlIcon)
+                        .placeholder(R.drawable.ic_thumbs_up) //показываем что-то, пока не загрузится указанная картинка
+                        .error(R.drawable.ic_thumb_down) // показываем что-то, если не удалось скачать картинку
+                        .into(userLogo);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -102,5 +110,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    public void bonusProgramPressed(View view) {
+        Log.i(TAG, "bonusProgramPressed");
+    }
+
+    public void favoriteRestaurants(View view) {
+        Log.i(TAG, "favoriteRestaurants");
+        Intent intent = new Intent(MainActivity.this, RestaurantsCardActivity.class);
+        intent.putExtra("favorite", true);
+        startActivity(intent);
+
     }
 }

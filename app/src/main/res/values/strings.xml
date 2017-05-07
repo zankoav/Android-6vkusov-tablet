@@ -9,6 +9,38 @@
     <string name="categories_title">Категории</string>
     <!--Для CategoriesActivity END-->
 
+    <!--Для CheckOutActivity-->
+    <string name="order_title">Оформление заказа</string>
+    <string name="order_name">Имя</string>
+    <string name="order_phone">Номер телефона</string>
+    <string name="order_street">Улица</string>
+    <string name="order_house">Дом</string>
+    <string name="order_block">Корпус</string>
+    <string name="order_flat">Квартира</string>
+    <string name="order_comment">Место для комментария</string>
+    <string name="order_button">Заказать</string>
+    <!--Для CheckOutActivity END-->
+
+    <!--Для BasketActivity -->
+    <string name="basket">Корзина</string>
+    <string name="basket_clear">Очистить</string>
+    <string name="basket_for_pay">К оплате</string>
+    <string name="basket_many_type">руб.</string>
+    <string name="basket_product_cost">руб. / 1 шт.</string>
+    <string name="basket_button_get_order">Оформить заказ</string>
+    <!--Для BasketActivity END-->
+
+    <!--Для RestaurantActivity-->
+    <string name="rest_menu">Меню</string>
+    <string name="rest_info">Доп.инфо</string>
+    <string name="rest_comments">Отзывы</string>
+    <string name="rest_delivery_price">Доставка:</string>
+    <string name="rest_delivery_time">Отзывы</string>
+    <string name="rest_time">Время:</string>
+    <string name="rest_delivery_price_free">бесплатно</string>
+    <string name="rest_min_delivery_price">Заказ от</string>
+    <string name="rest_working_time">Время работы</string>
+
     <!--Для RestaurantsActivity-->
     <string name="restaurants_title">Рестораны</string>
     <string name="restaurants_time">Время доставки:</string>
@@ -51,13 +83,28 @@
     <!--Для RegistrationActivity END-->
 
     <!--Для REST API-->
-    <string name="api_base_uri">https://6vkusov.by</string>
+    <string name="api_base">https://6vkusov.by</string>
+    <string name="api_key">252cbf79f74f36e0df806817847a0e1b</string>
     <string name="api_login">https://6vkusov.by/api/login</string>
     <string name="api_registration">https://6vkusov.by/api/register</string>
-    <string name="api_remember">https://6vkusov.by/api/remember</string>
+    <string name="api_reset_password">https://6vkusov.by/api/reset_password</string>
     <string name="api_categories">https://6vkusov.by/api/categories</string>
     <string name="api_restaurants">https://6vkusov.by/api/restaurants</string>
     <string name="api_user">https://6vkusov.by/api/user</string>
+    <string name="api_food">https://6vkusov.by/api/food</string>
+    <string name="api_send_order">https://6vkusov.by/api/send_order</string>
+    <string name="api_orders">https://6vkusov.by/api/orders</string>
+    <string name="api_restaurant_comments">https://6vkusov.by/api/restaurant_comments</string>
+    <string name="api_send_comment">https://6vkusov.by/api/send_comment</string>
+    <string name="api_add_variants">https://6vkusov.by/api/add_variants</string>
+    <string name="api_remove_variant">https://6vkusov.by/api/remove_variant</string>
+    <string name="api_remove_item">https://6vkusov.by/api/remove_item</string>
+    <string name="api_checkout_cart">https://6vkusov.by/api/checkout_cart</string>
+    <string name="api_basket_items">https://6vkusov.by/api/basket_items</string>
+    <string name="api_favourite">https://6vkusov.by/api/favourite</string>
+    <string name="api_favourites">https://6vkusov.by/api/favourites</string>
+    <string name="api_invite">https://6vkusov.by/api/invite</string>
+    <string name="api_user_points">https://6vkusov.by/api/user_points</string>
     <!--Для REST API END-->
 
     <!--Errors-->

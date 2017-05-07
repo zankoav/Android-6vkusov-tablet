@@ -10,6 +10,7 @@
     <color name="colorBlack">#000000</color>
 
     <!--social-->
+    <color name="colorCheckOut">#fde6d0</color>
     <color name="colorOdnoklasniki">#FF7F00</color>
     <color name="colorGoogle">#DC4E41</color>
     <color name="colorVk">#4D7198</color>

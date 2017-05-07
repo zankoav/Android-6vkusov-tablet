@@ -1,6 +1,7 @@
 package com.example.alexandrzanko.tablet_6vkusov.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.alexandrzanko.tablet_6vkusov.Activities.Restaurant.RestaurantActivity;
+import com.example.alexandrzanko.tablet_6vkusov.Activities.RestaurantsCardActivity;
 import com.example.alexandrzanko.tablet_6vkusov.Models.Restaurant;
 import com.example.alexandrzanko.tablet_6vkusov.R;
 import com.squareup.picasso.Picasso;
@@ -48,16 +51,16 @@ public class RestaurantRecycleAdapter extends RecyclerView.Adapter<RestaurantRec
     }
 
     public RestaurantRecycleAdapter(ArrayList<Restaurant> restaurants, Context context){
-            this.restaurants = restaurants;
-            this.filterList = restaurants;
-            this.context = context;
+        this.restaurants = restaurants;
+        this.filterList = restaurants;
+        this.context = context;
 
-            rules = new HashMap<>();
-            rules.put(NEW, false);
-            rules.put(FREE_FOOD, false);
-            rules.put(FLASH, false);
-            rules.put(SALE, false);
-            priceMin = 0;
+        rules = new HashMap<>();
+        rules.put(NEW, false);
+        rules.put(FREE_FOOD, false);
+        rules.put(FLASH, false);
+        rules.put(SALE, false);
+        priceMin = 0;
     }
 
     private void changeRestList(){
@@ -103,7 +106,8 @@ public class RestaurantRecycleAdapter extends RecyclerView.Adapter<RestaurantRec
                 }
 
                 if (seekBar){
-                    if(restaurant.getMinimalPrice().intValue() > priceMin){
+                    Double pr = new Double(restaurant.get_minimal_price());
+                    if(pr.intValue() > priceMin){
                         match = false;
                         continue;
                     }
@@ -129,7 +133,7 @@ public class RestaurantRecycleAdapter extends RecyclerView.Adapter<RestaurantRec
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.setRestaurant(restaurants.get(position));
+        holder.setRestaurant(restaurants.get(position));
     }
 
     @Override
@@ -160,8 +164,8 @@ public class RestaurantRecycleAdapter extends RecyclerView.Adapter<RestaurantRec
                     filterX = filterList;
                 }
                 for (int i = 0; i < filterX.size(); i++){
-                    if(filterX.get(i).getName().toUpperCase().contains(constraint)){
-                        Restaurant restaurant = new Restaurant(filterX.get(i).getBaseUrl(), filterX.get(i).getJson());
+                    if(filterX.get(i).get_name().toUpperCase().contains(constraint)){
+                        Restaurant restaurant = filterX.get(i);
                         filters.add(restaurant);
                     }
                 }
@@ -187,46 +191,48 @@ public class RestaurantRecycleAdapter extends RecyclerView.Adapter<RestaurantRec
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-            TextView nameTV;
-            TextView kitchenType;
-            TextView timeTV;
-            TextView deliveryType;
-            TextView likesTV;
-            TextView dislikesTV;
-            ImageView imageView;
+        TextView nameTV;
+        TextView kitchenType;
+        TextView timeTV;
+        TextView deliveryType;
+        TextView likesTV;
+        TextView dislikesTV;
+        ImageView imageView;
 
+        public ViewHolder(View view){
+            super(view);
+            nameTV = (TextView) view.findViewById(R.id.restaurants_name);
+            timeTV = (TextView) view.findViewById(R.id.restaurants_time);
+            deliveryType = (TextView) view.findViewById(R.id.restaurants_delivery);
+            kitchenType = (TextView) view.findViewById(R.id.restaurants_kitchen_type);
+            likesTV = (TextView) view.findViewById(R.id.restaurants_likes);
+            dislikesTV = (TextView) view.findViewById(R.id.restaurants_dislikes);
+            imageView = (ImageView) view.findViewById(R.id.restaurants_icon);
 
-            public ViewHolder(View view){
-                super(view);
-                nameTV = (TextView) view.findViewById(R.id.restaurants_name);
-                timeTV = (TextView) view.findViewById(R.id.restaurants_time);
-                deliveryType = (TextView) view.findViewById(R.id.restaurants_delivery);
-                kitchenType = (TextView) view.findViewById(R.id.restaurants_kitchen_type);
-                likesTV = (TextView) view.findViewById(R.id.restaurants_likes);
-                dislikesTV = (TextView) view.findViewById(R.id.restaurants_dislikes);
-                imageView = (ImageView) view.findViewById(R.id.restaurants_icon);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    Intent intent = new Intent(context, RestaurantActivity.class);
+                    intent.putExtra(RestaurantsCardActivity.EXTRA_RESTAURANT, restaurants.get(position).get_slug());
+                    context.startActivity(intent);
+                }
+            });
+        }
 
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int position = getAdapterPosition();
-                        Log.i(TAG, "onClick: " + restaurants.get(position).getName());
-                    }
-                });
-            }
-            public void setRestaurant(Restaurant restaurant){
-                nameTV.setText(restaurant.getName());
-                timeTV.setText(restaurant.getDeliveryTime() + " мин.");
-                deliveryType.setText(restaurant.getMinimalPrice().toString() + " руб.");
-                kitchenType.setText(restaurant.getKitchens());
-                likesTV.setText(restaurant.getLikes() + "");
-                dislikesTV.setText(restaurant.getDislikes() + "");
-                Picasso.with(context)
-                        .load(restaurant.getUrl())
-                        .placeholder(R.drawable.ic_thumbs_up) //показываем что-то, пока не загрузится указанная картинка
-                        .error(R.drawable.ic_thumb_down) // показываем что-то, если не удалось скачать картинку
-                        .into(imageView);
-            }
+        public void setRestaurant(Restaurant restaurant){
+            nameTV.setText(restaurant.get_name());
+            timeTV.setText(restaurant.get_delivery_time() + " мин.");
+            deliveryType.setText((new Double(restaurant.get_minimal_price())).toString() + " руб.");
+            kitchenType.setText(restaurant.get_kitchens());
+            likesTV.setText(restaurant.get_comments().get("likes") + "");
+            dislikesTV.setText(restaurant.get_comments().get("dislikes") + "");
+            Picasso.with(context)
+                    .load(restaurant.get_iconURL())
+                    .placeholder(R.drawable.ic_thumbs_up) //показываем что-то, пока не загрузится указанная картинка
+                    .error(R.drawable.ic_thumb_down) // показываем что-то, если не удалось скачать картинку
+                    .into(imageView);
+        }
 
     }
 }

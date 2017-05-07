@@ -25,6 +25,8 @@ import org.json.JSONObject;
 public class RememberActivity extends AppCompatActivity implements LoadJson{
 
     private final String TAG = this.getClass().getSimpleName();
+    public final static String RESET = "com.example.alexandrzanko.tablet_6vkusov.RESET";
+
     private EditText email;
 
     @Override
@@ -46,6 +48,24 @@ public class RememberActivity extends AppCompatActivity implements LoadJson{
     @Override
     public void loadComplete(JSONObject obj, String sessionName) {
         Log.i(TAG,obj.toString());
+        if (obj != null) {
+            try {
+                String status = obj.getString("status");
+                if (status.equals("successful")){
+                    Intent answerIntent = new Intent();
+                    answerIntent.putExtra(RESET, obj.getString("email"));
+                    setResult(RESULT_OK, answerIntent);
+                    finish();
+                }else if(status.equals("error")){
+                    Toast toast = Toast.makeText(getApplicationContext(),obj.getString("message"), Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast toast = Toast.makeText(getApplicationContext(),this.getResources().getString(R.string.error_server), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
     }
 
     private void addToolBarToScreen() {
@@ -93,8 +113,7 @@ public class RememberActivity extends AppCompatActivity implements LoadJson{
             return;
         }
 
-        String url = this.getResources().getString(R.string.api_remember);
+        String url = this.getResources().getString(R.string.api_reset_password);
         (new JsonHelperLoad(url,params,this, TAG)).execute();
     }
-
 }

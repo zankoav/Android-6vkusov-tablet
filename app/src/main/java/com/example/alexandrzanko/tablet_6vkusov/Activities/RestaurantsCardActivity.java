@@ -30,10 +30,17 @@ import com.example.alexandrzanko.tablet_6vkusov.Adapters.RestaurantRecycleAdapte
 import com.example.alexandrzanko.tablet_6vkusov.Models.Restaurant;
 import com.example.alexandrzanko.tablet_6vkusov.R;
 import com.example.alexandrzanko.tablet_6vkusov.Singleton;
+import com.example.alexandrzanko.tablet_6vkusov.Users.STATUS;
+import com.example.alexandrzanko.tablet_6vkusov.Utilites.JsonLoader.JsonHelperLoad;
+import com.example.alexandrzanko.tablet_6vkusov.Utilites.JsonLoader.LoadJson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class RestaurantsCardActivity extends AppCompatActivity {
+public class RestaurantsCardActivity extends AppCompatActivity implements LoadJson {
 
     private final String TAG = this.getClass().getSimpleName();
     public static final String EXTRA_RESTAURANT = "Restaurant";
@@ -44,23 +51,55 @@ public class RestaurantsCardActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private TextView seekBarResult;
     private CheckBox checkNew, checkFreeFood, checkFlash, checkSale;
-
     private int toolBarHeight;
+
     private MenuItem search;
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RestaurantRecycleAdapter adapter;
 
+    private boolean isFavorite;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isFavorite) {
+            Singleton.currentState().getUser().getBasket().initBasketFromRegisterUser();
+            if (Singleton.currentState().getUser().getStatus() == STATUS.REGISTER) {
+                JSONObject params = new JSONObject();
+                String url = this.getResources().getString(R.string.api_favourites);
+                try {
+                    params.put("session", Singleton.currentState().getUser().getProfile().getString("session"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.i(TAG, "onResume: JsonHelperLoad starts");
+                (new JsonHelperLoad(url, params, this, "favorites")).execute();
+            } else {
+                ArrayList<String> slugs = Singleton.currentState().getStore().getAllSlugs();
+                if (slugs != null) {
+                    restaurants = Singleton.currentState().getStore().getFavoriteRestaurants(slugs);
+                    adapter = new RestaurantRecycleAdapter(restaurants,this);
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurants_card);
+        setContentView(R.layout.activity_restaurant_new);
         toolBarHeight = Build.VERSION.SDK_INT > 18 ? 0: getToolBarHeight();
         addToolBarToScreen();
         Bundle bundle = getIntent().getExtras();
-        String slug = bundle.getString("slug");
-        restaurants = singleton.getStore().getRestaurants(slug);
+        isFavorite = bundle.getBoolean("favorite");
+        restaurants = new ArrayList<>();
+        if (!isFavorite){
+            String slug = bundle.getString("slug");
+            restaurants = singleton.getStore().getRestaurants(slug);
+        }
         initViews();
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -178,10 +217,10 @@ public class RestaurantsCardActivity extends AppCompatActivity {
     private double getMaxPrice(){
         double max = 0;
         if(restaurants.size()>0){
-            max = restaurants.get(0).getMinimalPrice();
+            max = restaurants.get(0).get_minimal_price();
             for (int i = 0 ; i< restaurants.size(); i++){
-                if(max < restaurants.get(i).getMinimalPrice()){
-                    max = restaurants.get(i).getMinimalPrice();
+                if(max < restaurants.get(i).get_minimal_price()){
+                    max = restaurants.get(i).get_minimal_price();
                 }
             }
         }
@@ -281,6 +320,31 @@ public class RestaurantsCardActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void loadComplete(JSONObject obj, String sessionName) {
+        Log.i(TAG, "loadComplete: obj = " + obj);
+        if (obj != null){
+            try {
+                String status = obj.getString("status");
+                if (status.equals("successful")){
+                    JSONArray array = obj.getJSONArray("slugs");
+                    restaurants = new ArrayList<>();
+                    for(int i = 0; i < array.length(); i++){
+                        restaurants.add(Singleton.currentState().getStore().getRestaurantBySlug(array.getString(i)));
+                    }
+                    adapter = new RestaurantRecycleAdapter(restaurants,this);
+                    recyclerView.setAdapter(adapter);
+                }
+            } catch (JSONException e) {
+                Log.i(TAG, "loadComplete: error" + e);
+                e.printStackTrace();
+            }
+        }else{
+            Log.i(TAG, "loadComplete: obj = null");
+        }
     }
 }
 

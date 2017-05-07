@@ -1,17 +1,23 @@
 package com.example.alexandrzanko.tablet_6vkusov.Activities.AuthActivities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.alexandrzanko.tablet_6vkusov.R;
@@ -24,6 +30,8 @@ import org.json.JSONObject;
 
 public class RegistrationActivity extends AppCompatActivity implements LoadJson{
 
+    public final static String REGISTRATION = "com.example.alexandrzanko.tablet_6vkusov.REGISTRATION";
+
     private final String TAG = this.getClass().getSimpleName();
     private EditText email,password, confirmPassword, firstName, promoCode;
     private CheckBox checkBoxLicense, checkBoxNews;
@@ -34,17 +42,6 @@ public class RegistrationActivity extends AppCompatActivity implements LoadJson{
         setContentView(R.layout.activity_registration);
         addToolBarToScreen();
         initFields();
-
-    }
-
-    @Override
-    public void loadComplete(JSONObject obj, String sessionName) {
-        if(obj != null){
-            Log.i(TAG,obj.toString());
-        }else{
-            Toast toast = Toast.makeText(getApplicationContext(),this.getResources().getString(R.string.error_server), Toast.LENGTH_SHORT);
-            toast.show();
-        }
     }
 
     @Override
@@ -53,6 +50,32 @@ public class RegistrationActivity extends AppCompatActivity implements LoadJson{
         InputMethodManager inputManager = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    public void loadComplete(JSONObject obj, String sessionName) {
+        Log.i(TAG,obj.toString());
+        if(obj != null){
+            try {
+                String status = obj.getString("status");
+                if (status.equals("successful")){
+                    Intent answerIntent = new Intent();
+                    answerIntent.putExtra(REGISTRATION, "Вы успешно зарегистрированы, Вам на почту " + email.getText().toString() + " отправлено письмо для активации аккаунта");
+                    setResult(RESULT_OK, answerIntent);
+                    finish();
+                }else if(status.equals("error")){
+                    Toast toast = Toast.makeText(getApplicationContext(),obj.getString("message"), Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast toast = Toast.makeText(getApplicationContext(),this.getResources().getString(R.string.error_server), Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }else{
+            Toast toast = Toast.makeText(getApplicationContext(),this.getResources().getString(R.string.error_server), Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     public void registerPressed(View view) {
@@ -150,6 +173,22 @@ public class RegistrationActivity extends AppCompatActivity implements LoadJson{
     }
 
     private void initFields(){
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x/4;
+        int height = size.y;
+        if(height <= 900) {
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width, width);
+            RelativeLayout relative_form = (RelativeLayout) findViewById(R.id.relative_form);
+            ImageView logo = (ImageView) findViewById(R.id.iv_profile);
+            logo.setMaxHeight(width);
+            logo.setMaxWidth(width);
+            layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+            relative_form.setGravity(Gravity.CENTER_HORIZONTAL);
+            relative_form.updateViewLayout(logo, layoutParams);
+        }
+
         email = (EditText)findViewById(R.id.et_email);
         password = (EditText)findViewById(R.id.et_password);
         confirmPassword = (EditText)findViewById(R.id.et_confirm_password);
@@ -159,8 +198,11 @@ public class RegistrationActivity extends AppCompatActivity implements LoadJson{
         checkBoxNews = (CheckBox)findViewById(R.id.check_box_news);
     }
 
-
     public void backButtonClick(View view) {
-        finish();
+        this.finish();
+    }
+
+    public void licenseClick(View view) {
+        Log.i(TAG,"Go to the licenseActivity");
     }
 }

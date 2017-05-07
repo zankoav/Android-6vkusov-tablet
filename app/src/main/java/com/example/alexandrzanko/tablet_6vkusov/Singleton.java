@@ -40,10 +40,10 @@ public class Singleton {
         return user;
     }
 
-    public void setUser(UserInterface user) {
-        this.user = user;
-    }
+    public void setUser(UserInterface user) {this.user = user;}
 
-    public LocalStorage getStore() {return store;}
+    public LocalStorage getStore() {
+        return store;
+    }
 
 }

@@ -1,5 +1,11 @@
 package com.example.alexandrzanko.tablet_6vkusov.Users;
 
+import android.util.Log;
+
+import com.example.alexandrzanko.tablet_6vkusov.LocalStorage;
+import com.example.alexandrzanko.tablet_6vkusov.Singleton;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -27,5 +33,15 @@ public class General implements UserInterface {
     @Override
     public Basket getBasket() {
         return basket;
+    }
+
+    @Override
+    public int getPoints() {
+        return 0;
+    }
+
+    @Override
+    public void setPoints(int points) {
+
     }
 }

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_restaurants"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/all_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-212dp"
+        android:layout_below="@+id/action_bar"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/filter_view"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/colorHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textColor="@color/colorWhite"
+                android:text="Минимальная сумма заказа"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:theme="@style/AppTheme.SeekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"/>
+                <TextView
+                    android:id="@+id/seekBar_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:textColor="@color/colorWhite"
+                    android:text="298 руб"
+                    android:textAlignment="center"/>
+
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/check_box_new"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textColor="@color/colorWhite"
+                android:theme="@style/CheckBoxFilter"
+                android:text="Новое"/>
+            <CheckBox
+                android:id="@+id/check_box_free_food"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textColor="@color/colorWhite"
+                android:theme="@style/CheckBoxFilter"
+                android:text="Еда за баллы"/>
+            <CheckBox
+                android:id="@+id/check_box_flash"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textColor="@color/colorWhite"
+                android:theme="@style/CheckBoxFilter"
+                android:text="Акции"/>
+            <CheckBox
+                android:id="@+id/check_box_sale"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textColor="@color/colorWhite"
+                android:theme="@style/CheckBoxFilter"
+                android:text="Скидки"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/filter_view"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+    <include layout="@layout/action_bar"/>
+</RelativeLayout>
+
+

@@ -7,7 +7,9 @@ import org.json.JSONObject;
  */
 
 public interface UserInterface {
-    public STATUS getStatus();
-    public JSONObject getProfile();
-    public Basket getBasket();
+    STATUS getStatus();
+    JSONObject getProfile();
+    Basket getBasket();
+    int getPoints();
+    void setPoints(int points);
 }
