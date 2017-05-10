@@ -77,7 +77,6 @@ public class ProfileActivity extends AppCompatActivity implements AppBarLayout.O
                 }
 
         );
-
         viewPager = (ViewPager)findViewById(R.id.viewpager);
         tabLayout= (TabLayout)findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);

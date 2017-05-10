@@ -28,7 +28,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".Activities.ProfileActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Activities.Trash.RestaurantsActivity"/>
 
         <activity android:name=".Activities.RestaurantsCardActivity"/>
